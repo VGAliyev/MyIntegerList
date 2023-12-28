@@ -75,8 +75,9 @@ public class IntegerListImpl implements IntegerList {
     @Override
     public boolean contains(Integer item) {
         validateItem(item);
-        sort();
-        return binarySearch(item);
+        Integer[] arr = toArray();
+        sort(arr);
+        return binarySearch(arr, item);
     }
 
     @Override
@@ -151,30 +152,29 @@ public class IntegerListImpl implements IntegerList {
         }
     }
 
-    private void sort() {
-        integerArray = Arrays.copyOf(integerArray, listSize); // decrease array length to listSize
-        for (int i = 0; i < integerArray.length - 1; i++) {
+    private void sort(Integer[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
             int minElementIndex = i;
-            for (int j = i + 1; j < integerArray.length; j++) {
-                if (integerArray[j] < integerArray[minElementIndex]) {
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[j] < arr[minElementIndex]) {
                     minElementIndex = j;
                 }
             }
-            int tmp = integerArray[i];
-            integerArray[i] = integerArray[minElementIndex];
-            integerArray[minElementIndex] = tmp;
+            int tmp = arr[i];
+            arr[i] = arr[minElementIndex];
+            arr[minElementIndex] = tmp;
         }
     }
 
-    private boolean binarySearch(Integer item) {
+    private boolean binarySearch(Integer[] arr, Integer item) {
         int min = 0;
-        int max = integerArray.length - 1;
+        int max = arr.length - 1;
         while (min <= max) {
             int mid = (min + max) / 2;
-            if (item.equals(integerArray[mid])) {
+            if (item.equals(arr[mid])) {
                 return true;
             }
-            if (item < integerArray[mid]) {
+            if (item < arr[mid]) {
                 max = mid - 1;
             } else {
                 min = mid + 1;
