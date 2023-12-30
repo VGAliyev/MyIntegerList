@@ -25,5 +25,17 @@ public class Main {
         testSpeedSortMethods.insertionSort();
         System.out.println(System.currentTimeMillis() - start);
         System.out.println();
+
+        System.out.println("Quick sort!");
+        start = System.currentTimeMillis();
+        testSpeedSortMethods.quickSort();
+        System.out.println(System.currentTimeMillis() - start);
+        System.out.println();
+
+        System.out.println("Merge sort!");
+        start = System.currentTimeMillis();
+        testSpeedSortMethods.mergeSort();
+        System.out.println(System.currentTimeMillis() - start);
+        System.out.println();
     }
 }
